@@ -1,0 +1,84 @@
+.app-container {
+    display: grid;
+    max-width: 90%;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f9f9;
+}
+
+div.news-section .container{
+    display: flex;
+}
+
+.search-input {
+    margin: 6px;
+    width: 20%;
+}
+
+.newsTile {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.newsTile:hover {
+    transform: translateY(-2px);
+}
+
+.newsTile.pinned {
+    border-color: #ff9800;
+    background: #fff8e1;
+}
+
+.title {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.link {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    color: #1976d2;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0.25rem 0;
+}
+
+.pinButton {
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    background: #1976d2;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.pinButton:hover {
+    background: #125a9c;
+}
+
+.badge {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #ff9800;
+}

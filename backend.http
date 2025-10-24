@@ -1,0 +1,27 @@
+### Get latest articles (open endpoint)
+GET http://localhost:5544/api/articles?page=1&pageSize=5
+Content-Type: application/json
+
+
+### Get pinned articles by user - user bounded
+GET http://localhost:5544/api/users/user1/articles
+Content-Type: application/json
+Authorization: Bearer dXNlcjFAcG9ydGFibGUuY29tLmF1OnBhc3N3b3JkMQ==
+
+### Set pinned article - user bounded
+POST http://localhost:5544/api/users/user1/articles
+Content-Type: application/json
+Authorization: Bearer dXNlcjFAcG9ydGFibGUuY29tLmF1OnBhc3N3b3JkMQ==
+
+{
+"id":"australia-news/commentisfree/2025/oct/24/dont-believe-the-hype-why-australian-taxpayers-should-be-wary-of-the-critical-minerals-deal-with-trump",
+"type":"article",
+"webPublicationDate":"2025-10-24T00:03:03Z",
+"webTitle":"Don’t believe the hype: why Australian taxpayers should be wary of the critical minerals deal with Trump | Nicki Hutley",
+"webUrl":"https://www.theguardian.com/australia-news/commentisfree/2025/oct/24/dont-believe-the-hype-why-australian-taxpayers-should-be-wary-of-the-critical-minerals-deal-with-trump",
+"source":"THE_GUARDIAN"
+}
+
+### Delete pinned article - user bounded
+DELETE http://localhost:5544/api/users/user1/articles/australia-news%2Fcommentisfree%2F2025%2Foct%2F24%2Fdont-believe-the-hype-why-australian-taxpayers-should-be-wary-of-the-critical-minerals-deal-with-trump
+Authorization: Bearer dXNlcjFAcG9ydGFibGUuY29tLmF1OnBhc3N3b3JkMQ==

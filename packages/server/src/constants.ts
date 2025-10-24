@@ -1,0 +1,1 @@
+export const SECONDS_ONE_HOUR = 3600;
