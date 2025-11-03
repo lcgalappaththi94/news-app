@@ -3,6 +3,7 @@ import InMemoryCache from './connectors/cache/inMemoryCache';
 import GuardianAPIConnector from './connectors/api/guardianAPIConnector';
 import {NewsAPIConnector} from "./connectors/api/newsAPIConnector";
 import {NEWS_SOURCE} from "./types/newsSources";
+import NewsOrgAPIConnector from "./connectors/api/newsOrgAPIConnector";
 
 export type AppContext = {
     db: InMemoryDataStore;
@@ -16,6 +17,7 @@ export function createContext(): AppContext {
         cache: new InMemoryCache(),
         newsServices: {
             [NEWS_SOURCE.GUARDIAN]: new GuardianAPIConnector(),
+            [NEWS_SOURCE.NEWS_ORG]: new NewsOrgAPIConnector(),
             [NEWS_SOURCE.BBC]: null,
             [NEWS_SOURCE.CNN]: null,
         },

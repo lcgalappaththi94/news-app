@@ -2,8 +2,8 @@ export type PageInfo = {
     totalItems: number
     itemsPerPage: number
     currentPage: number
-    hasNextPage: boolean
     totalPages: number
+    hasNextPage: boolean
 };
 
 export type PageInfoInput = {
@@ -15,4 +15,3 @@ export type PaginatedResult<T> = {
     pageInfoRes: PageInfo;
     results: T[];
 };
-

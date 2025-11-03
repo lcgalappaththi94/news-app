@@ -1,10 +1,11 @@
 import {useCallback, useContext, useEffect} from "react";
 import NewsView from "./components/NewsView.tsx";
-import {getNewsArticles, getPinnedArticles} from "./servicess/backendApiConnector.ts";
-import {debounce, toNumber} from 'lodash';
+import {getNewsArticles, getPinnedArticles} from "./services/backendApiConnector.ts";
+import {debounce} from 'lodash';
 import {AppContext} from "./store/AppContext.tsx";
 import {AppHeader} from "./components/AppHeader.tsx";
 import ErrorBoundary from "./components/ErrorBoundary.tsx";
+import Pagination from "./components/Pagination.tsx";
 
 function App() {
     const {state, dispatch} = useContext(AppContext);
@@ -26,8 +27,9 @@ function App() {
     const fetchNewsDebounced = useCallback(
         debounce((newsSources: string, searchQuery: string) => {
             getNewsArticles(newsSources, {page: state.page, pageSize: state.pageSize}, searchQuery)
-                .then(articles => {
-                    dispatch({type: "setArticles", articles});
+                .then(data => {
+                    dispatch({type: "setArticles", articles: data?.articles || []});
+                    dispatch({type: "setPageInfo", pageInfo: data?.pageInfo || {}});
                 }).catch((e) => {
                 console.error(e);
             });
@@ -38,13 +40,8 @@ function App() {
     return (
         <div className="app-container">
             <ErrorBoundary>
-                <input type="number"
-                       onChange={(e) => dispatch({type: "setPage", page: toNumber(e.target.value)})}/>
-                <input type="number" onChange={(e) => dispatch({
-                    type: "setPageSize",
-                    pageSize: toNumber(e.target.value)
-                })}/>
                 <AppHeader/>
+                {state.articles ? <Pagination totalItems={state.pageInfo.totalItems}/> : null}
                 <NewsView/>
             </ErrorBoundary>
         </div>

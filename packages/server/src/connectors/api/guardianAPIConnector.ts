@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {NewsAPIConnector} from "./newsAPIConnector";
-import {GuardianApiResponse, ResponseArticle} from "../../types/newsResponse";
+import {GuardianApiResponse, NewsResponse} from "../../types/newsResponse";
 import {NEWS_SOURCE} from "../../types/newsSources";
 import {PageInfoInput} from "../../types/pageable";
 
@@ -17,7 +17,7 @@ class GuardianAPIConnector implements NewsAPIConnector {
         });
     }
 
-    async getNews(query: string, pageInfo: PageInfoInput): Promise<ResponseArticle[]> {
+    async getNews(query: string, pageInfo: PageInfoInput): Promise<NewsResponse> {
         try {
             const response = await this.guardianApi.get<GuardianApiResponse>(`/search`, {
                 params: {
@@ -29,14 +29,23 @@ class GuardianAPIConnector implements NewsAPIConnector {
                 },
             });
             const data: GuardianApiResponse = response.data;
-            return data.response.results.map((article) => ({
-                id: article.id,
-                type: article.type,
-                webPublicationDate: article.webPublicationDate,
-                webTitle: article.webTitle,
-                webUrl: article.webUrl,
-                source: NEWS_SOURCE.GUARDIAN
-            }));
+            return {
+                articles: data.response.results.map((article) => ({
+                    id: article.id,
+                    type: article.type,
+                    webPublicationDate: article.webPublicationDate,
+                    webTitle: article.webTitle,
+                    webUrl: article.webUrl,
+                    source: NEWS_SOURCE.GUARDIAN
+                })),
+                pageInfo: {
+                    totalItems: data.response.total,
+                    itemsPerPage: data.response.pageSize,
+                    currentPage: data.response.currentPage,
+                    totalPages: data.response.pages,
+                    hasNextPage: data.response.currentPage < data.response.pages,
+                }
+            };
         } catch (err) {
             console.error('Error fetching news articles:', err);
             throw err;

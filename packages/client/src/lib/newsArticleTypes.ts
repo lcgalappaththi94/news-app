@@ -1,12 +1,8 @@
+import type {ResponseArticle} from "news-app-server/src/types/newsResponse.ts";
+
 export type NewsArticleTypes = {
-    id: string;
-    type: string;
-    webPublicationDate: string;
-    webTitle: string;
-    webUrl: string;
-    source: string;
-    pinned: boolean;
-};
+    pinned?: boolean;
+} & ResponseArticle;
 
 type PageInfo = {
     totalItems: number

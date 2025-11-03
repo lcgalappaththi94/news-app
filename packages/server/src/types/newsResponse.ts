@@ -29,6 +29,26 @@ type GuardianArticle = {
     pillarName: string;
 };
 
+export type NewsOrgApiResponse = {
+    status: string;
+    totalResults: number;
+    articles: NewsOrgArticle[];
+};
+
+export type NewsOrgArticle = {
+    source: {
+        id: string | null;
+        name: string;
+    },
+    author: string | null;
+    title: string;
+    description: string;
+    url: string;
+    urlToImage: string | null;
+    publishedAt: string;
+    content: string | null;
+}
+
 
 export type ResponseArticle = {
     id: string;
