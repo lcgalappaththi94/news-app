@@ -1,7 +1,7 @@
 import type {NewsArticleTypes} from "../lib/newsArticleTypes.ts";
 import {useContext} from "react";
 import {AppContext} from "../store/AppContext.tsx";
-import {pinArticle, unpinArticle} from "../servicess/backendApiConnector.ts";
+import {pinArticle, unpinArticle} from "../services/backendApiConnector.ts";
 import {getFormattedDate} from "../lib/utils.ts";
 
 type Props = {

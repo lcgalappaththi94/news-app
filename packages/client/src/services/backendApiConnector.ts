@@ -1,6 +1,7 @@
 import axios from "axios";
-import type {NewsArticleTypes} from "../lib/newsArticleTypes.ts";
-import {AUTH_TOKEN_KEY, DEFAULT_USER} from "../lib/constants.ts";
+import type {NewsArticleTypes} from "../lib/newsArticleTypes";
+import {AUTH_TOKEN_KEY, DEFAULT_USER} from "../lib/constants";
+import type {NewsResponse} from "news-app-server/src/types/newsResponse";
 
 const backendAPI = axios.create({
     baseURL: import.meta.env.VITE_API_BASE,
@@ -40,7 +41,7 @@ type PageInfoQuery = {
     pageSize: number;
 };
 
-export async function getNewsArticles(newsSources: string, pageInfo: PageInfoQuery, query?: string) {
+export async function getNewsArticles(newsSources: string, pageInfo: PageInfoQuery, query?: string): Promise<NewsResponse> {
     const params = {
         query: query?.trim() ? query : undefined,
         newsSources: newsSources.trim() ? newsSources : undefined,
@@ -49,7 +50,7 @@ export async function getNewsArticles(newsSources: string, pageInfo: PageInfoQue
     const response = await backendAPI.get('/articles', {
         params
     });
-    return response?.data?.articles ?? [];
+    return response?.data ?? {};
 }
 
 export async function getPinnedArticles(userId: string = DEFAULT_USER) {
